@@ -1,23 +1,57 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import ContactList from './ContactList';
+import Header from './Header';
+import AddContact from './AddContact';
+
 
 function App() {
+  const LOCAL_STORAGE_KEY = "contacts";
+  const [contacts, setContacts] = useState([]);
+  const [editingContact, setEditingContact] = useState(null);
+
+  useEffect(() => {
+    const retrivaContacts = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    if (retrivaContacts) setContacts(retrivaContacts);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts));
+  }, [contacts]);
+
+  const addContactHandler = (contact) => {
+    setContacts([...contacts, { id: Date.now(), ...contact }]);
+  };
+
+  const removeContactHandler = (id) => {
+    setContacts(contacts.filter((contact) => contact.id !== id));
+  };
+
+  const editContactHandler = (id) => {
+    const contactToEdit = contacts.find(contact => contact.id === id);
+    setEditingContact(contactToEdit);
+  };
+
+  const updateContactHandler = (updatedContact) => {
+    setContacts(contacts.map(contact =>
+      contact.id === updatedContact.id ? updatedContact : contact
+    ));
+    setEditingContact(null);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='ui container'>
+      <Header />
+      <AddContact 
+        addContactHandler={addContactHandler}
+        editingContact={editingContact}
+        updateContactHandler={updateContactHandler}
+      />
+      <ContactList
+        contacts={contacts}
+        removeContact={removeContactHandler}
+        editContact={editContactHandler}
+      />
     </div>
   );
 }
