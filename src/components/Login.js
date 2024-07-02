@@ -17,16 +17,17 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     const loggedUser = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-    if ( user.email === loggedUser.email && user.password === loggedUser.password) 
+
+    if ( loggedUser && user.email === loggedUser.email && user.password === loggedUser.password) 
       {
       console.log("Attempting to Login User");
-      localStorage.setItem("logged in", true);
+      localStorage.setItem("loggedin", JSON.stringify(true));
       navigate("/");      
       } else {
           alert("Wrong Credentials Try Again");
       }
   };
-  
+
 
   return (
     <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>

@@ -44,7 +44,7 @@ const Register = () => {
                                         [e.target.name]: e.target.value,
                                     })
                                 }
-                                type="text"
+                                type="name"
                                 placeholder="Enter Username"
                             />
                         </Form.Group>
