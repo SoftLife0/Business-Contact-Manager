@@ -1,24 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ContactCard from '../components/ContactCard';
+import Header from '../components/Header';
+
 
 const ContactList = ({ contacts, removeContact, editContact }) => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedContactId, setSelectedContactId] = useState(null);
 
   const handleRemoveContact = (id) => {
-    setSelectedContactId(id);
-    setModalOpen(true);
-  };
-
-  const confirmRemoveContact = () => {
-    removeContact(selectedContactId);
-    setModalOpen(false);
-    setSelectedContactId(null);
-  };
-
-  const cancelRemoveContact = () => {
-    setModalOpen(false);
-    setSelectedContactId(null);
+    const isConfirmed = window.confirm("Are you sure you want to delete this contact?");
+    if (isConfirmed) {
+      removeContact(id);
+    }
   };
 
   const handleEditContact = (id) => {
@@ -40,13 +31,15 @@ const ContactList = ({ contacts, removeContact, editContact }) => {
     );
   });
 
+
   return (
     <>
+      <Header />
       <div className='ui celled list'>
           {renderContactList}
       </div>
 
-      {/* Modal for Confirming Contact Removal */}
+      {/* Modal for Confirming Contact Removal
       {modalOpen && (
         <div className="ui basic modal active" aria-hidden={!modalOpen}>
           <div className="ui icon header">
@@ -67,7 +60,7 @@ const ContactList = ({ contacts, removeContact, editContact }) => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
     </>
   );
 };

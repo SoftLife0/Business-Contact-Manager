@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 
 const Header = () => {
   return (
-    <Navbar className="bg-body-tertiary">
+    <Navbar className="bg-body-tertiary" sticky='top'>
       <>
         <Navbar.Brand href="#home" style={{ fontSize: '23px', fontWeight: '500'}}>
           {/* <img
