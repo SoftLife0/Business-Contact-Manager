@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ContactList from './pages/ContactList';
 import AddContact from './pages/AddContact';
 import './App.css'
+import Login from './components/Login';
+import Register from './components/Register';
+
 
 
 function App() {
@@ -45,6 +48,8 @@ function App() {
         <Route path="/" element={<ContactList contacts={contacts} removeContact={removeContactHandler} editContact={editContactHandler} />} />
         <Route path="/add" element={<AddContact addContactHandler={addContactHandler} />} />
         <Route path="/edit/:id" element={<AddContact editingContact={editingContact} updateContactHandler={updateContactHandler} />} />
+        <Route path="/login" element={<Login contacts={contacts} removeContact={removeContactHandler} editContact={editContactHandler} />} />
+        <Route path="/register" element={<Register contacts={contacts} removeContact={removeContactHandler} editContact={editContactHandler} />} />
       </Routes>
     </Router>
   );
