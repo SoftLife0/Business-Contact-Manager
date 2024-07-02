@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ContactCard from './ContactCard';
+import ContactCard from '../components/ContactCard';
 
 const ContactList = ({ contacts, removeContact, editContact }) => {
   const [modalOpen, setModalOpen] = useState(false);

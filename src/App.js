@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import ContactList from './ContactList';
-import Header from './Header';
-import AddContact from './AddContact';
+import ContactList from './pages/ContactList';
+import Header from './components/Header';
+import AddContact from './pages/AddContact';
+import './App.css'
 
 
 function App() {
