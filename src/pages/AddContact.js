@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import defaultUserIcon from "../img/user.png";
-
+import Header from '../components/Header';
 
 function AddContact({ addContactHandler, editingContact, updateContactHandler }) {
+  const navigate = useNavigate();
   const [contact, setContact] = useState({ image: '', name: '', email: '' });
   const fileInputRef = useRef(null);
 
@@ -25,6 +27,7 @@ function AddContact({ addContactHandler, editingContact, updateContactHandler })
       addContactHandler(contact);
     }
     setContact({ image: '', name: '', email: '' });
+    navigate('/');
   };
 
   const handleImageChange = (e) => {
@@ -43,12 +46,13 @@ function AddContact({ addContactHandler, editingContact, updateContactHandler })
   };
 
   return (
-    <div className="ui main">
-      <h2>{editingContact ? 'Edit Contact' : 'Add Contact'}</h2>
-      <form className="ui form" onSubmit={add}>
-
-        <div className="field">
-          <label>Choose a Picture</label>
+    <>
+      <Header />
+      <div className="ui container">
+        <h2>{editingContact ? 'Edit Contact' : 'Add Contact'}</h2>
+        <form className="ui form" onSubmit={add}>
+          <div className="field">
+            <label>Choose a Picture</label>
             <img 
               src={contact.image || defaultUserIcon} 
               alt="Avatar" 
@@ -56,39 +60,40 @@ function AddContact({ addContactHandler, editingContact, updateContactHandler })
               style={{ width: '200px', cursor: 'pointer' }} 
               title='Add Picture '
             />
-          <input
-            type="file"
-            accept="image/*"
-            ref={fileInputRef}
-            style={{ display: 'none' }}
-            onChange={handleImageChange}
-          />
-        </div>
-        
-        <div className="field">
-          <label>Name</label>
-          <input
-            type="text"
-            name="name"
-            placeholder="Name"
-            value={contact.name}
-            onChange={(e) => setContact({ ...contact, name: e.target.value })}
-          />
-        </div>
+            <input
+              type="file"
+              accept="image/*"
+              ref={fileInputRef}
+              style={{ display: 'none' }}
+              onChange={handleImageChange}
+            />
+          </div>
+          
+          <div className="field">
+            <label>Name</label>
+            <input
+              type="text"
+              name="name"
+              placeholder="Name"
+              value={contact.name}
+              onChange={(e) => setContact({ ...contact, name: e.target.value })}
+            />
+          </div>
 
-        <div className="field">
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={contact.email}
-            onChange={(e) => setContact({ ...contact, email: e.target.value })}
-          />
-        </div>
-        <button className="ui button blue">{editingContact ? 'Update' : 'Add'}</button>
-      </form>
-    </div>
+          <div className="field">
+            <label>Email</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={contact.email}
+              onChange={(e) => setContact({ ...contact, email: e.target.value })}
+            />
+          </div>
+          <button className="ui button blue">{editingContact ? 'Update' : 'Add'}</button>
+        </form>
+      </div>
+    </>
   );
 }
 

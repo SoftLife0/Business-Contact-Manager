@@ -1,10 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import ContactCard from '../components/ContactCard';
 import Header from '../components/Header';
 
 
 const ContactList = ({ contacts, removeContact, editContact }) => {
 
+  const navigate = useNavigate();
   const handleRemoveContact = (id) => {
     const isConfirmed = window.confirm("Are you sure you want to delete this contact?");
     if (isConfirmed) {
@@ -14,6 +16,7 @@ const ContactList = ({ contacts, removeContact, editContact }) => {
 
   const handleEditContact = (id) => {
     editContact(id);
+    navigate(`/edit/${id}`)
   };
 
   if (contacts.length === 0) {
@@ -35,32 +38,11 @@ const ContactList = ({ contacts, removeContact, editContact }) => {
   return (
     <>
       <Header />
-      <div className='ui celled list'>
+      <div className='ui container celled list'>
           {renderContactList}
       </div>
 
-      {/* Modal for Confirming Contact Removal
-      {modalOpen && (
-        <div className="ui basic modal active" aria-hidden={!modalOpen}>
-          <div className="ui icon header">
-            <i className="trash icon"></i>
-            Confirm Deletion
-          </div>
-          <div className="content">
-            <p>Are you sure you want to delete this contact?</p>
-          </div>
-          <div className="actions">
-            <div className="ui red basic cancel inverted button" onClick={cancelRemoveContact}>
-              <i className="remove icon"></i>
-              No
-            </div>
-            <div className="ui green ok inverted button" onClick={confirmRemoveContact}>
-              <i className="checkmark icon"></i>
-              Yes
-            </div>
-          </div>
-        </div>
-      )} */}
+      
     </>
   );
 };

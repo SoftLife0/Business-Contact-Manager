@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ContactList from './pages/ContactList';
 import AddContact from './pages/AddContact';
 import './App.css'
@@ -40,18 +40,13 @@ function App() {
   };
 
   return (
-    <div className='ui container'>
-      <AddContact 
-        addContactHandler={addContactHandler}
-        editingContact={editingContact}
-        updateContactHandler={updateContactHandler}
-      />
-      <ContactList
-        contacts={contacts}
-        removeContact={removeContactHandler}
-        editContact={editContactHandler}
-      />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<ContactList contacts={contacts} removeContact={removeContactHandler} editContact={editContactHandler} />} />
+        <Route path="/add" element={<AddContact addContactHandler={addContactHandler} />} />
+        <Route path="/edit/:id" element={<AddContact editingContact={editingContact} updateContactHandler={updateContactHandler} />} />
+      </Routes>
+    </Router>
   );
 }
 
