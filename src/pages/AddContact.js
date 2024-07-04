@@ -90,11 +90,7 @@ function AddContact({ addContactHandler, editingContact, updateContactHandler })
               onChange={(e) => setContact({ ...contact, email: e.target.value })}
             />
           </div>
-          <button className="ui button red">
-            <a href="">
-              {editingContact ? 'Update' : 'Add'}
-            </a>
-          </button>
+          <button className="ui button red" type="submit">{editingContact ? 'Update' : 'Add'}</button>
         </form>
       </div>
     </>

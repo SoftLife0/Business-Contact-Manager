@@ -7,7 +7,6 @@ import Login from './components/Login';
 import Register from './components/Register';
 
 
-
 function App() {
   const LOCAL_STORAGE_KEY = "contacts";
   const [contacts, setContacts] = useState([]);
@@ -47,7 +46,7 @@ function App() {
       <Routes>
         <Route path="/" element={<ContactList contacts={contacts} removeContact={removeContactHandler} editContact={editContactHandler} />} />
         <Route path="/add" element={<AddContact addContactHandler={addContactHandler} />} />
-        <Route path="/edit/:id" element={<AddContact editingContact={editingContact} updateContactHandler={updateContactHandler} />} />
+        <Route path="/edit/:id" element={<AddContact addContactHandler={addContactHandler} editingContact={editingContact} updateContactHandler={updateContactHandler} />} />
         <Route path="/login" element={<Login contacts={contacts} removeContact={removeContactHandler} editContact={editContactHandler} />} />
         <Route path="/register" element={<Register contacts={contacts} removeContact={removeContactHandler} editContact={editContactHandler} />} />
       </Routes>
