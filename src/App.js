@@ -5,12 +5,16 @@ import AddContact from './pages/AddContact';
 import './App.css'
 import Login from './components/Login';
 import Register from './components/Register';
+import Setup from './components/Setup';
+import Verify from './components/Verify';
 
 
 function App() {
   const LOCAL_STORAGE_KEY = "contacts";
   const [contacts, setContacts] = useState([]);
   const [editingContact, setEditingContact] = useState(null);
+  const [twoFactorSecret, setTwoFactorSecret] = useState('');
+
 
   useEffect(() => {
     const retrivaContacts = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
@@ -49,6 +53,9 @@ function App() {
         <Route path="/edit/:id" element={<AddContact addContactHandler={addContactHandler} editingContact={editingContact} updateContactHandler={updateContactHandler} />} />
         <Route path="/login" element={<Login contacts={contacts} removeContact={removeContactHandler} editContact={editContactHandler} />} />
         <Route path="/register" element={<Register contacts={contacts} removeContact={removeContactHandler} editContact={editContactHandler} />} />
+        <Route path="/setup-2fa" element={<Setup setTwoFactorSecret={setTwoFactorSecret} />} />
+        <Route path="/verify-2fa" element={<Verify secret={twoFactorSecret} />} />
+    
       </Routes>
     </Router>
   );
