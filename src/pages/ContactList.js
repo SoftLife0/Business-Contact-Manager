@@ -23,10 +23,6 @@ const ContactList = ({ contacts, removeContact, editContact }) => {
     navigate(`/edit/${id}`)
   };
 
-  if (contacts.length === 0) {
-    return <div>No contacts available.</div>;
-  }
-
   const renderContactList = contacts.map((contact) => {
     return (
       <ContactCard
@@ -47,9 +43,18 @@ const ContactList = ({ contacts, removeContact, editContact }) => {
         <Card>
           <Card.Body> Welcome Back {userName.username}👋</Card.Body>
         </Card>
-        <div className='ui container celled list'>
+
+        {contacts.length === 0 ? (
+          <div className='ui container celled list'>
+            No contacts available.
+            <a href="/add">Add New contact</a>
+          </div>
+        ) : (
+          <div className='ui container celled list'>
             {renderContactList}
-        </div>
+          </div>
+        )}
+        
       </div>
 
       
