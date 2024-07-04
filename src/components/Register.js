@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 import { FaLock } from 'react-icons/fa';
+import axios from 'axios';
+import Verify from './Verify';
 
 const Register = () => {
 
@@ -12,16 +14,25 @@ const Register = () => {
         password: ""
     });
 
+    const [secret, setSecret] = useState('');
+    const [qrCode, setQrCode] = useState('');
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Form submitted");
-        console.log("User input:", user);
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(user));
-        console.log("User saved to local storage");
-        navigate("/login");
-    }
+        try {
+            const response = await axios.post('http://localhost:3001/generate-secret');
+            setSecret(response.data.secret);
+            setQrCode(response.data.qrCode);
+            const userWithSecret = { ...user, secret: response.data.secret };
+            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(userWithSecret));
+            alert("Registered successfully! Please configure your 2FA.");
+            navigate("/login");
+
+        } catch (error) {
+            console.error('There was a problem generating the secret keys', error);
+        }
+    };
 
     return (
         <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh', backgroundSize: 'cover', backgroundPosition: 'center', }}>
@@ -85,6 +96,14 @@ const Register = () => {
                             Register
                         </Button>
                     </Form>
+
+                    {qrCode && (
+                        <div>
+                            <img src={qrCode} alt="QR Code" />
+                            <p>Secret: {secret}</p>
+                            <Verify secret={secret} />
+                        </div>
+                    )}
                 </Col>
             </Row>
         </div>
