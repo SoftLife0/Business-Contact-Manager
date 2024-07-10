@@ -41,7 +41,7 @@ const ContactList = ({ contacts, removeContact, editContact }) => {
 
       <div className='ui container'>
         <Card>
-          <Card.Body> Welcome Back {userName.username}👋</Card.Body>
+          <Card.Body> Welcome Back {userName.username}👋 <br/> Please login to add new Contact</Card.Body>
         </Card>
 
         {contacts.length === 0 ? (
