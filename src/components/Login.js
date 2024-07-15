@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 import { FaLock } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import Verify from './Verify';
+// import Setup from './Setup';
+// import Verify from './Verify';
+import Setup from './Setup';
+
 
 
 const Login = () => {
@@ -12,6 +15,7 @@ const Login = () => {
   const [secret, setSecret] = useState('');
   const [showVerify, setShowVerify] = useState(false);
   const navigate = useNavigate();
+  
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -81,9 +85,15 @@ const Login = () => {
               <Button variant="primary" type="submit" className="mt-4 w-100">
                 Login
               </Button>
+              
+              <div className="text-center mt-4">
+                <a href="/register"> Create an account</a>
+              </div>
+            
+
             </Form>
           ) : (
-            <Verify secret={secret} onSuccess={handleVerificationSuccess} />
+            <Setup secret={secret} onSuccess={handleVerificationSuccess} />
           )}
         </Col>
       </Row>

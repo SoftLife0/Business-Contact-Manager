@@ -9,7 +9,8 @@ const ContactList = ({ contacts, removeContact, editContact }) => {
 
   const LOCAL_STORAGE_KEY = "user";
   const navigate = useNavigate();
-  const userName = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+  const userName = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || { username: 'Guest' };
+  // const userName = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
 
   const handleRemoveContact = (id) => {
     const isConfirmed = window.confirm("Are you sure you want to delete this contact?");
@@ -41,7 +42,7 @@ const ContactList = ({ contacts, removeContact, editContact }) => {
 
       <div className='ui container'>
         <Card>
-          <Card.Body> Welcome Back {userName.username}👋 <br/> Please login to add new Contact</Card.Body>
+          <Card.Body> Welcome Back {userName.username}👋 <br/> Please create or login to add new Contact</Card.Body>
         </Card>
 
         {contacts.length === 0 ? (
