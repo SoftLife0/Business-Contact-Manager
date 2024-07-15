@@ -22,6 +22,8 @@ const Verify = ({ secret, onSuccess }) => {
     }
   };
 
+  
+
   return (
     <div>
       <Form onSubmit={verifyToken}>

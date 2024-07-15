@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 import { FaLock } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-// import Setup from './Setup';
-// import Verify from './Verify';
 import Setup from './Setup';
+// import Verify from './Verify';
 
 
 

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import Verify from './Verify';
 // import { useSwipeable } from 'react-swipeable';
@@ -23,6 +23,14 @@ const Setup = () => {
             console.error('There was a problem generating the secret:', error)
         }
     };
+
+    useEffect(() => {
+      const storedSecret = localStorage.getItem('2FASecret');
+      if (storedSecret) {
+        setSecret(storedSecret);
+        setAuthButton(true);
+      }
+    }, []);
 
     const handleVerificationSuccess = () => {
       localStorage.setItem("loggedin", JSON.stringify(true));
