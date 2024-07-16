@@ -45,7 +45,7 @@ const Setup = () => {
           style={{ padding: '16px 22px', borderRadius: '10px' }}
 
         >
-          Swipe to Set Up 2FA
+          Set Up 2 Factor Verification
         </button>
       )}
       {qrCode && (
